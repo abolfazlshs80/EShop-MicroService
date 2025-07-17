@@ -6,6 +6,7 @@ using System.Text;
 
 public class JwtHandler : IJwtHandler
 {
+    
     private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
     private readonly JwtOptions _options;
     private readonly SecurityKey _issuerSigningKey;
