@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDP.Ioc", "Src\Services\IDP.Service\IDP.Ioc\IDP.Ioc.csproj", "{8B746362-6A77-4968-B57B-FF6179B36C7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDP.UnitTest", "Src\Services\IDP.Service\IDP.UnitTest\IDP.UnitTest.csproj", "{529ADC3C-D9E7-4242-BEA8-4EB0ACE89E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth", "Src\Common\Auth\Auth.csproj", "{80A5F085-814A-4545-97D7-66BB679B29D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{529ADC3C-D9E7-4242-BEA8-4EB0ACE89E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{529ADC3C-D9E7-4242-BEA8-4EB0ACE89E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{529ADC3C-D9E7-4242-BEA8-4EB0ACE89E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A5F085-814A-4545-97D7-66BB679B29D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A5F085-814A-4545-97D7-66BB679B29D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A5F085-814A-4545-97D7-66BB679B29D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A5F085-814A-4545-97D7-66BB679B29D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{902CFAFB-9D09-4072-84D7-BCA931CF780C} = {63A9D2FE-CC7C-453F-8795-33ED1E36173E}
 		{8B746362-6A77-4968-B57B-FF6179B36C7D} = {63A9D2FE-CC7C-453F-8795-33ED1E36173E}
 		{529ADC3C-D9E7-4242-BEA8-4EB0ACE89E79} = {63A9D2FE-CC7C-453F-8795-33ED1E36173E}
+		{80A5F085-814A-4545-97D7-66BB679B29D0} = {01961618-92F3-466C-BC33-0BE49A745499}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8293240D-F778-476B-9450-E883AD32A6DE}
