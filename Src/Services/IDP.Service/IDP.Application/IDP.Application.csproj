@@ -8,10 +8,16 @@
 
   <ItemGroup>
     <Folder Include="DTOs\" />
-    <Folder Include="Handler\" />
     <Folder Include="Helper\" />
-    <Folder Include="Command\" />
     <Folder Include="Query\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IDP.Domain\IDP.Domain.csproj" />
   </ItemGroup>
 
 </Project>
