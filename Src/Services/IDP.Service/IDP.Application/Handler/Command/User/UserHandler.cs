@@ -10,11 +10,20 @@ using System.Threading.Tasks;
 
 namespace IDP.Application.Handler.Command.User
 {
-    public class UserHandler(IUserRepository userRepository) : IRequestHandler<CreateUser, bool>
+    public class UserHandler() : IRequestHandler<CreateUser, bool>
     {
         public async Task<bool> Handle(CreateUser request, CancellationToken cancellationToken)
         {
-            return await userRepository.Insert(new Domain.Entities.User { CodeNumber=request.CodeNumber,FullName=request.FullName});
+            //return await userRepository.Create(new Domain.Entities.User
+            //{
+            //    CodeNumber = request.CodeNumber,
+            //    FullName = request.FullName,
+            //    UserName = request.UserName,
+            //    Password = request.Password,
+            //    Salt = request.Salt
+            //});
+
+            return true;
         }
     }
 }
