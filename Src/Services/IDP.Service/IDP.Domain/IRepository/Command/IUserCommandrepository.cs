@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IDP.Domain.IRepository.Command
 {
-    public interface IUserCommandrepository:IBaseCommonRepository<User>
+    public interface IUserCommandRepository : IBaseCommonRepository<User>
     {
     }
 }
