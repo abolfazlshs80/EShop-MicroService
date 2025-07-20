@@ -14,6 +14,6 @@ namespace IDP.Domain.Entities.BaseEntities
         }
         public Int64 Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }
