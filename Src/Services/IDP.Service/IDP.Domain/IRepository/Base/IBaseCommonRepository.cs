@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace IDP.Domain.IRepository.Base
 {
-    public interface IBaseCommonRepository<in T> where T : class
+
+    public interface IBaseCommonRepository<T> where T : class
     {
-        Task<bool>Create(T entity);
+        Task<T> Insert(T entity);
         Task<bool>Update(T entity);
         Task<bool>Delete(T entity);
     }
