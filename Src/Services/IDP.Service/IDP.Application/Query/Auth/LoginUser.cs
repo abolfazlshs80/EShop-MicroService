@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Auth;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace IDP.Application.Query.Auth
 {
-    public class LoginUser:IRequest<bool>
+    public class LoginUser:IRequest<JsonWebToken>
     {
-        public string UserName { get; set; }
-        public string Pswword { get; set; }
+        public string PhoneNumber { get; set; }
+        public int Code { get; set; }
     }
 }
