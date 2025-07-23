@@ -15,14 +15,21 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
 
 
-	  <PackageReference Include="DotNetCore.CAP" Version="8.3.1" />
+	  <!--<PackageReference Include="DotNetCore.CAP" Version="8.3.1" />
 	  <PackageReference Include="DotNetCore.CAP.Dashboard" Version="8.3.1" />
 	  <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.1" />
-	  <PackageReference Include="DotNetCore.CAP.SqlServer" Version="8.3.1" />
+	  <PackageReference Include="DotNetCore.CAP.SqlServer" Version="8.3.1" />-->
+
+
+	  <PackageReference Include="MassTransit" Version="8.3.1" />
+	  <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.3.1" />
+	  <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.1" />
+	  <PackageReference Include="MassTransit.SqlTransport.SqlServer" Version="8.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Auth\Auth.csproj" />
+    <ProjectReference Include="..\..\IBus\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\IDP.Domain\IDP.Domain.csproj" />
   </ItemGroup>
 

@@ -13,6 +13,7 @@ using IDP.Infra.Repositories.Command;
 using IDP.Infra.Repositories.Query;
 using IDP.Infra.Repository.Command;
 using IDP.Infra.Repository.Command.Base;
+using MassTransit;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -50,28 +51,46 @@ builder.Services.AddScoped<IOtpRedisRepository, OtpRedisRepository>();
 
 #region messageMq   
 
-builder.Services.AddCap(options =>
+//builder.Services.AddCap(options =>
+//{
+//    options.UseEntityFramework<ShopCommandDbContext>();
+//    options.UseDashboard(path => path.PathMatch = "/cap");
+//    options.UseRabbitMQ(options =>
+//    {
+//        options.ConnectionFactoryOptions = options =>
+//        {
+//            options.Ssl.Enabled = false;
+//            options.HostName = builder.Configuration["Cap:HostName"];
+//            options.UserName = builder.Configuration["Cap:UserName"];
+//            options.Password = builder.Configuration["Cap:Password"];
+//            options.Port = int.Parse( builder.Configuration["Cap:Port"]);
+//        };
+
+//    });
+//    options.FailedRetryCount = int.Parse( builder.Configuration["Cap:FailedRetryCount"]);
+//    options.FailedRetryInterval = int.Parse( builder.Configuration["Cap:FailedRetryInterval"]);
+
+
+//});
+builder.Services.AddMassTransit(busConfig =>
 {
-    options.UseEntityFramework<ShopCommandDbContext>();
-    options.UseDashboard(path => path.PathMatch = "/cap");
-    options.UseRabbitMQ(options =>
+
+
+    busConfig.SetKebabCaseEndpointNameFormatter();
+    busConfig.UsingRabbitMq((context, cfg) =>
     {
-        options.ConnectionFactoryOptions = options =>
+        cfg.Host(new Uri(builder.Configuration.GetValue<string>("Rabbit:Host")), h =>
         {
-            options.Ssl.Enabled = false;
-            options.HostName = builder.Configuration["Cap:HostName"];
-            options.UserName = builder.Configuration["Cap:UserName"];
-            options.Password = builder.Configuration["Cap:Password"];
-            options.Port = int.Parse( builder.Configuration["Cap:Port"]);
-        };
+            h.Username(builder.Configuration.GetValue<string>("Rabbit:UserNmae"));
+            h.Password(builder.Configuration.GetValue<string>("Rabbit:Password"));
 
+        });
+
+        cfg.UseMessageRetry(r => r.Exponential(10, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(60), TimeSpan.FromSeconds(5)));
+
+        cfg.ConfigureEndpoints(context);
     });
-    options.FailedRetryCount = int.Parse( builder.Configuration["Cap:FailedRetryCount"]);
-    options.FailedRetryInterval = int.Parse( builder.Configuration["Cap:FailedRetryInterval"]);
-
-
 });
-
 #endregion
 
 

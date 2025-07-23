@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
-using DotNetCore.CAP;
+using EventBus.Events;
 using IDP.Application.Command.Auth;
 using IDP.Domain.DTOs;
 using IDP.Domain.Entities;
 using IDP.Domain.IRepository.Command;
 using IDP.Domain.IRepository.Query;
+using MassTransit;
 using MediatR;
 
 namespace IDP.Application.Handler.Command.Auth
@@ -15,19 +16,21 @@ namespace IDP.Application.Handler.Command.Auth
         private readonly IUserCommandRepository _userCommandRepository;
         private readonly IUserQueryRepository _userQueryRepository;
         private readonly IMapper _mapper;
-        private readonly ICapPublisher _capBus;
-
+        //private readonly ICapPublisher _capBus;
+        private readonly IPublishEndpoint _publishEndpoint;
         public AuthLoginCommandHandler(IOtpRedisRepository otpRedisRepository,
             IUserCommandRepository userCommandRepository,
-           ICapPublisher capPublisher,
-            IUserQueryRepository userQueryRepository, IMapper mapper)
+           //ICapPublisher capPublisher,
+            IUserQueryRepository userQueryRepository,
+             IPublishEndpoint publishEndpoint, 
+             IMapper mapper)
         {
             _otpRedisRepository = otpRedisRepository;
             _userCommandRepository = userCommandRepository;
             _userQueryRepository = userQueryRepository;
             _mapper = mapper;
-
-            _capBus = capPublisher;
+            _publishEndpoint = publishEndpoint;
+            //_capBus = capPublisher;
         }
         public async Task<bool> Handle(LoginMobileUser request, CancellationToken cancellationToken)
         {
@@ -44,12 +47,12 @@ namespace IDP.Application.Handler.Command.Auth
                     //{
                     //    MobileNumber = request.MobileNumber,
                     //});
-                    //await _publishEndpoint.Publish<OtpEvents>(new OtpEvents
-                    //{
+                    await _publishEndpoint.Publish<OtpEvents>(new OtpEvents
+                    {
 
-                    //    MobileNumber = request.MobileNumber,
-                    //    OtpCode = code.ToString(),
-                    //});
+                        MobileNumber = request.MobileNumber,
+                        OtpCode = code.ToString(),
+                    });
 
                     userobj.UserName = request.MobileNumber;
                     var res = await _userCommandRepository.Insert(userobj);
@@ -64,12 +67,12 @@ namespace IDP.Application.Handler.Command.Auth
                     //{
                     //    MobileNumber = request.MobileNumber,
                     //});
-                    //await _publishEndpoint.Publish<OtpEvents>(new OtpEvents
-                    //{
+                    await _publishEndpoint.Publish<OtpEvents>(new OtpEvents
+                    {
 
-                    //    MobileNumber = request.MobileNumber,
-                    //    OtpCode = code.ToString(),
-                    //});
+                        MobileNumber = request.MobileNumber,
+                        OtpCode = code.ToString(),
+                    });
                     userobj.UserName = request.MobileNumber;
                     await _otpRedisRepository.Insert(new Otp { UserName = user.MobileNumber, OtpCode = code, IsUse = false });
                 }
